@@ -1,4 +1,5 @@
 const fs = require('fs');
+const trataErros = require('./erros/funcoesErro.js')
 
 const filesPath = process.argv;
 const link = filesPath[2];
@@ -8,8 +9,7 @@ fs.readFile(link, 'utf-8', (err, text) => {
         if (err) throw err;
         contaPalavras(text);
     } catch(err){
-        if (err.code === 'ENOENT') console.log('Erro que esperava');
-        else console.log('Outro erro');
+        trataErros(err);
     }
 })
 
