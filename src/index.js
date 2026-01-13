@@ -4,27 +4,29 @@ const filesPath = process.argv;
 const link = filesPath[2];
 
 fs.readFile(link, 'utf-8', (err, text) => {
-    quebraEmParagrafos(text);
-    //verificaPalavrasDuplicadas(text);
+    try{
+        if (err) throw err;
+        contaPalavras(text);
+    } catch(err){
+        if (err.code === 'ENOENT') console.log('Erro que esperava');
+        else console.log('Outro erro');
+    }
 })
 
-// criar um array com as palavras
-// contar ocorrencias
-// montar um objeto com o resultado
-
-function quebraEmParagrafos(text) {
-    const paragrafos = text.toLowerCase().split('\n');
+function contaPalavras(text) {
+    const paragrafos = extraiParagrafos(text);
     const contagem = paragrafos
         .flatMap((paragrafo) => {
             if(!paragrafo) return [];
             return verificaPalavrasDuplicadas(paragrafo);
         })
-    //     .filter((paragrafo) => paragrafo)
-    //     .map((paragrafo) => {
-    //        return verificaPalavrasDuplicadas(paragrafo);
-    // });
     console.log(contagem);
 }
+
+function extraiParagrafos(text) {
+    return paragrafos = text.toLowerCase().split('\n');
+}
+
 
 function limpaPalavras(palavra) {
     return palavra.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,'');
