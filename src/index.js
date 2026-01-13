@@ -14,19 +14,31 @@ fs.readFile(link, 'utf-8', (err, text) => {
 
 function quebraEmParagrafos(text) {
     const paragrafos = text.toLowerCase().split('\n');
-    const contagem = paragrafos.map((paragrafo) => {
-        return verificaPalavrasDuplicadas(paragrafo);
-    })
+    const contagem = paragrafos
+        .flatMap((paragrafo) => {
+            if(!paragrafo) return [];
+            return verificaPalavrasDuplicadas(paragrafo);
+        })
+    //     .filter((paragrafo) => paragrafo)
+    //     .map((paragrafo) => {
+    //        return verificaPalavrasDuplicadas(paragrafo);
+    // });
     console.log(contagem);
 }
 
+function limpaPalavras(palavra) {
+    return palavra.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g,'');
+}
 
 function verificaPalavrasDuplicadas(text) {
     const listaPalavras = text.split(' ');
     const resultado = {};
     //objeto[propriedade] = valor;
     listaPalavras.forEach((palavra) => {
-        resultado[palavra] = (resultado[palavra] || 0) + 1
+        if (palavra.length >= 3) {
+            const palavraLimpa = limpaPalavras(palavra);
+            resultado[palavraLimpa] = (resultado[palavraLimpa] || 0) + 1
+        }
     })
     return resultado;
 }
