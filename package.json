@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-   "type": "module",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -14,9 +14,12 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-
   "bugs": {
     "url": "https://github.com/gpego1/contador-de-palavras-nodejs/issues"
   },
-  "homepage": "https://github.com/gpego1/contador-de-palavras-nodejs#readme"
+  "homepage": "https://github.com/gpego1/contador-de-palavras-nodejs#readme",
+  "dependencies": {
+    "chalk": "^5.6.2",
+    "commander": "^14.0.2"
+  }
 }
